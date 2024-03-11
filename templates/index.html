@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}" ></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}" ></script>
+    <title>Hyderabad Restaurant Recommendation System</title>
+</head>
+
+<body>
+<form action="/" enctype="multipart/form-data" method="post">
+    <div class="main-search-input-wrap">       
+        <div class="main-search-input fl-wrap">
+            <div class="main-search-input-item">
+                <input type="text" value="" placeholder="Enter the name of the last visited restaurant or name of a dish" id="title" name="title">
+            </div>            
+            <button class="main-search-button">Search</button>
+        </div>    
+    </div>
+</form>
+
+<div class="container d-flex mt-6">
+    {% if error %}
+    <h1>I'm sorry, but no cuisine or restaurant are found for this entry, make sure you've entered the correct name of the restaurant of cuisine, else you can find all restaurants <a href="{{ url_for('dashboard') }}" class="btn btn-success">here</a>:)
+    </h1>
+    {% elif data %}
+        {% for i in range(5) %}
+        <div class="card border-success mb-3 mt-6" style="width: 600px; margin-left: 5px">
+            <div class="card-header bg-transparent border-success">{{ names[i] }}</div>
+            <div class="card-body text-success">
+                <h5 class="card-title">{{ cuisines[i] }}</h5>
+                <p class="card-text">{{ collections[i] }}</p>
+            </div>
+            <!-- <div class="card-footer bg-transparent border-success"></div> -->
+            <div class="card-footer bg-transparent border-success"><a class="btn btn-success" target="_blank" href="{{ links[i] }}">visit</a></div>
+
+        </div>
+        {% endfor %}
+    {% endif %}
+</div>
+<div class="footer">
+    <p>Developed by Khan Faisal</p><br>
+    <a href='https://khanfaisal.netlify.app' class="link">  Portfolio</a>
+    <a href="https://github.com/khanfaisal79960" class="link">  Github</a>
+    <a href="https://medium.com@khanfaisal79960" class="link">  Medium</a>
+    <a href="https://www.linkedin.com/in/khanfaisal79960" class="link">  Linkedin</a>
+    </div>
+</body>
+
+</html>
